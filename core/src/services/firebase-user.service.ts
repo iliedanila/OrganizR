@@ -1,18 +1,18 @@
-import { IUserService } from './user.service';
-import { IUser } from '../interfaces/user.interface';
-import { auth } from '../config/firebase';
+import { IUserService } from "./user.service";
+import { IUser } from "../interfaces/user.interface";
+import { auth } from "../config/firebase";
 
-class FirebaseUserService implements IUserService {
+export class FirebaseUserService implements IUserService {
     async register(email: string, password: string, displayName: string): Promise<IUser> {
         const userRecord = await auth.createUser({
             email,
             password,
-            displayName
+            displayName,
         });
         return {
             uid: userRecord.uid,
             email: userRecord.email!,
-            displayName: userRecord.displayName!
+            displayName: userRecord.displayName!,
         };
     }
 
@@ -24,7 +24,7 @@ class FirebaseUserService implements IUserService {
         return {
             uid: userRecord.uid,
             email: userRecord.email!,
-            displayName: userRecord.displayName!
+            displayName: userRecord.displayName!,
         };
     }
 
@@ -34,5 +34,3 @@ class FirebaseUserService implements IUserService {
         // await firebase.auth().signOut();
     }
 }
-
-export const userService = new FirebaseUserService();

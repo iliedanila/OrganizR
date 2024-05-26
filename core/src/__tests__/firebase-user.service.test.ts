@@ -1,5 +1,5 @@
-import { userService } from "../firebase-user.service";
-import { auth } from "../../config/firebase";
+import { FirebaseUserService } from "../services/firebase-user.service";
+import { auth } from "../config/firebase";
 
 jest.mock("../config/firebase", () => ({
     auth: {
@@ -9,7 +9,10 @@ jest.mock("../config/firebase", () => ({
 }));
 
 describe("FirebaseUserService", () => {
+    let userService: FirebaseUserService;
+
     beforeEach(() => {
+        userService = new FirebaseUserService();
         jest.clearAllMocks();
     });
 

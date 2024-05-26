@@ -1,5 +1,5 @@
-import { taskService } from "../firebase-task.service";
-import { db } from "../../config/firebase";
+import { FirebaseTaskService } from "../services/firebase-task.service";
+import { db } from "../config/firebase";
 
 jest.mock("../config/firebase", () => ({
     db: {
@@ -15,12 +15,16 @@ jest.mock("../config/firebase", () => ({
 }));
 
 describe("FirebaseTaskService", () => {
+    let taskService: FirebaseTaskService;
+
     beforeEach(() => {
+        taskService = new FirebaseTaskService();
         jest.clearAllMocks();
     });
 
     test("createTask should add a new task", async () => {
         const mockTask = {
+            id: "1",
             title: "Test Task",
             description: "Test Description",
         };
@@ -28,7 +32,9 @@ describe("FirebaseTaskService", () => {
         await taskService.createTask(mockTask);
 
         expect(db.collection).toHaveBeenCalledWith("tasks");
-        expect(db.collection().doc().set).toHaveBeenCalledWith(expect.objectContaining(mockTask));
+        expect(db.collection().doc(mockTask.id).set).toHaveBeenCalledWith(
+            expect.objectContaining(mockTask)
+        );
     });
 
     test("getTasks should retrieve all tasks", async () => {
@@ -36,7 +42,7 @@ describe("FirebaseTaskService", () => {
             { id: "1", title: "Task 1", description: "Description 1" },
             { id: "2", title: "Task 2", description: "Description 2" },
         ];
-        db.collection().get.mockResolvedValue({
+        (db.collection().get as jest.Mock).mockResolvedValue({
             docs: mockTasks.map((task) => ({ data: () => task })),
         });
 
@@ -51,7 +57,7 @@ describe("FirebaseTaskService", () => {
         await taskService.updateTask(mockTask);
 
         expect(db.collection).toHaveBeenCalledWith("tasks");
-        expect(db.collection().doc("1").update).toHaveBeenCalledWith(mockTask);
+        expect(db.collection().doc(mockTask.id).update).toHaveBeenCalledWith(mockTask);
     });
 
     test("deleteTask should delete a task by id", async () => {
