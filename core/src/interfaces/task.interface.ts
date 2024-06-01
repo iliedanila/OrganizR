@@ -1,7 +1,7 @@
-export interface ITask {
-    id?: string;
-    title: string;
-    description: string;
-    dueDate?: Date;
-    isCompleted?: boolean;
+export interface Task {
+  id?: string;
+  title: string;
+  description: string;
+  dueDate?: Date;
+  isCompleted?: boolean;
 }
