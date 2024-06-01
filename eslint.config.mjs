@@ -1,24 +1,24 @@
-import typescriptParser from '@typescript-eslint/parser';
-import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import typescriptParser from "@typescript-eslint/parser";
+import typescriptPlugin from "@typescript-eslint/eslint-plugin";
 
 export default [
     {
-        ignores: ['node_modules/**'],
+        ignores: ["node_modules/**"],
     },
     {
-        files: ['**/*.ts', '**/*.tsx'],
+        files: ["**/*.ts", "**/*.tsx"],
         languageOptions: {
             parser: typescriptParser,
             parserOptions: {
                 ecmaVersion: 2020,
-                sourceType: 'module',
+                sourceType: "module",
             },
         },
         plugins: {
-            '@typescript-eslint': typescriptPlugin,
+            "@typescript-eslint": typescriptPlugin,
         },
         rules: {
-            'quotes': ['error', 'double'], // Enforce double quotes
+            quotes: ["error", "double"], // Enforce double quotes
         },
     },
 ];
