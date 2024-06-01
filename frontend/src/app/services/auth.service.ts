@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   Auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
   user,
-} from "@angular/fire/auth";
-import { UserCredential } from "firebase/auth";
-import { Observable } from "rxjs";
+} from '@angular/fire/auth';
+import { UserCredential } from 'firebase/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
   constructor(private auth: Auth) {}
