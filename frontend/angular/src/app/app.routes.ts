@@ -1,8 +1,8 @@
-import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
+import { Routes } from "@angular/router";
+import { LoginComponent } from "./components/login/login.component"; // Ensure this import exists
 // Other imports
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: "login", component: LoginComponent },
   // Other routes
 ];
