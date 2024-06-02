@@ -31,7 +31,7 @@ export class RegisterComponent {
   async register() {
     try {
       await this.authService.register(this.email, this.password);
-      this.router.navigate(["/tasks"]);
+      await this.router.navigate(["/tasks"]);
     } catch (error) {
       console.error("Registration failed", error);
     }
