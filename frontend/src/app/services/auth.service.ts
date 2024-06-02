@@ -1,13 +1,9 @@
 import { Injectable } from "@angular/core";
+import { Auth } from "@angular/fire/auth";
 import {
-  Auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signOut,
-} from "@angular/fire/auth";
-import { UserCredential, User } from "firebase/auth";
-import { Observable, from } from "rxjs";
-import { authState } from "@angular/fire/auth";
+} from "firebase/auth";
 
 @Injectable({
   providedIn: "root",
@@ -15,19 +11,20 @@ import { authState } from "@angular/fire/auth";
 export class AuthService {
   constructor(private auth: Auth) {}
 
-  async register(email: string, password: string): Promise<UserCredential> {
-    return createUserWithEmailAndPassword(this.auth, email, password);
-  }
-
-  async login(email: string, password: string): Promise<UserCredential> {
+  login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  async logout(): Promise<void> {
-    return signOut(this.auth);
+  register(email: string, password: string) {
+    return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-  getCurrentUser(): Observable<User | null> {
-    return authState(this.auth);
+  isLoggedIn(): boolean {
+    const user = this.auth.currentUser;
+    return user !== null;
+  }
+
+  logout() {
+    return this.auth.signOut();
   }
 }
