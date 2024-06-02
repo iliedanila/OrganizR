@@ -1,1 +1,7 @@
-<p>task-list works!</p>
+<div>
+  <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  <!-- Task list content -->
+  <div *ngFor="let task of tasks">
+    <p>{{ task.title }}</p>
+  </div>
+</div>
