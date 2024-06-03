@@ -20,8 +20,8 @@ import { MatButtonModule } from "@angular/material/button";
   ],
 })
 export class LoginComponent {
-  email: string = "";
-  password: string = "";
+  email = "";
+  password = "";
 
   constructor(
     private authService: AuthService,
@@ -31,7 +31,7 @@ export class LoginComponent {
   async login() {
     try {
       await this.authService.login(this.email, this.password);
-      this.router.navigate(["/tasks"]);
+      await this.router.navigate(["/tasks"]);
     } catch (error) {
       console.error("Login failed", error);
     }
