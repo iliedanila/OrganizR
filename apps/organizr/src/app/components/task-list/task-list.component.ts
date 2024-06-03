@@ -2,11 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { TaskService } from "../../services/task.service";
+import { NgForOf } from "@angular/common";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: "app-task-list",
   templateUrl: "./task-list.component.html",
   styleUrls: ["./task-list.component.css"],
+  standalone: true,
+  imports: [NgForOf, MatButton],
 })
 export class TaskListComponent implements OnInit {
   tasks: any[] = [];

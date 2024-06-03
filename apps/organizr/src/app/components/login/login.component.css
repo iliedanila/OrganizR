@@ -14,3 +14,8 @@ button {
     width: 100%;
     margin-top: 1rem;
 }
+
+.error-message {
+    color: red;
+    margin-bottom: 1rem;
+}
