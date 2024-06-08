@@ -1,7 +1,19 @@
-<div>
-  <button mat-raised-button color="warn" (click)="logout()">Logout</button>
-  <!-- Task list content -->
-  <div *ngFor="let task of tasks">
-    <p>{{ task.title }}</p>
+<div class="task-list-container">
+  <h2>Task List</h2>
+  <div class="actions">
+    <button mat-raised-button color="primary" [routerLink]="['/tasks/create']">Create New Task</button>
+    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </div>
+
+  <div *ngFor="let task of tasks" class="task-item">
+    <mat-card class="task-card">
+      <div class="task-content">
+        <div>
+          <mat-card-title>{{ task.title }}</mat-card-title>
+          <mat-card-content>{{ task.description }}</mat-card-content>
+        </div>
+        <button mat-button color="warn" (click)="deleteTask(task.id)">Delete</button>
+      </div>
+    </mat-card>
   </div>
 </div>

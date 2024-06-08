@@ -1,0 +1,32 @@
+.task-list-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.task-item {
+    margin-bottom: 1rem;
+}
+
+.task-card {
+    display: flex;
+    padding: 1rem;
+    background-color: #f9f9f9;
+}
+
+.task-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+button {
+    margin-left: 1rem;
+}

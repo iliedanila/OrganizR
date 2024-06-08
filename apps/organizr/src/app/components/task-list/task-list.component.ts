@@ -1,16 +1,17 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { TaskService } from "../../services/task.service";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
 import { NgForOf } from "@angular/common";
-import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: "app-task-list",
   templateUrl: "./task-list.component.html",
   styleUrls: ["./task-list.component.css"],
   standalone: true,
-  imports: [NgForOf, MatButton],
+  imports: [MatCardModule, MatButtonModule, RouterLink, NgForOf],
 })
 export class TaskListComponent implements OnInit {
   tasks: any[] = [];
@@ -29,6 +30,17 @@ export class TaskListComponent implements OnInit {
     this.taskService.getTasks().subscribe((tasks: any[]) => {
       this.tasks = tasks;
     });
+  }
+
+  deleteTask(taskId: string): void {
+    this.taskService
+      .deleteTask(taskId)
+      .then(() => {
+        this.loadTasks();
+      })
+      .catch((error) => {
+        console.error("Delete task failed", error);
+      });
   }
 
   logout(): void {
