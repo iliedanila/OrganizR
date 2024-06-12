@@ -20,13 +20,10 @@ import { MatButtonModule } from "@angular/material/button";
   ],
 })
 export class RegisterComponent {
-  email: string = "";
-  password: string = "";
+  email = "";
+  password = "";
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   async register() {
     try {

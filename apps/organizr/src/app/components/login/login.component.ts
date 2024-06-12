@@ -22,14 +22,11 @@ import { NgIf } from "@angular/common";
   ],
 })
 export class LoginComponent {
-  email: string = "";
-  password: string = "";
-  errorMessage: string = "";
+  email = "";
+  password = "";
+  errorMessage = "";
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   async login() {
     try {
