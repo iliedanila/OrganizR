@@ -4,30 +4,40 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  authState,
+  UserCredential,
+  User,
 } from "@angular/fire/auth";
-import { UserCredential } from "firebase/auth";
 import { Observable } from "rxjs";
+import { authState } from "rxfire/auth";
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth, private cookieService: CookieService) {}
 
   async register(email: string, password: string): Promise<UserCredential> {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
   async login(email: string, password: string): Promise<UserCredential> {
-    return signInWithEmailAndPassword(this.auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      this.auth,
+      email,
+      password
+    );
+    const idToken = await userCredential.user.getIdToken();
+    this.cookieService.set("auth_token", idToken, 1); // Expires in 1 day
+    return userCredential;
   }
 
   async logout(): Promise<void> {
+    this.cookieService.delete("auth_token");
     return signOut(this.auth);
   }
 
-  getCurrentUser(): Observable<any> {
+  getCurrentUser(): Observable<User | null> {
     return authState(this.auth);
   }
 
