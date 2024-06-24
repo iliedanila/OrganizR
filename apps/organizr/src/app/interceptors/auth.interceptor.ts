@@ -1,12 +1,16 @@
-import { HttpInterceptorFn } from "@angular/common/http";
+import {
+  HttpInterceptorFn,
+  HttpRequest,
+  HttpHandlerFn,
+  HttpEvent,
+} from "@angular/common/http";
 import { inject } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
-import { HttpRequest, HttpHandlerFn, HttpEvent } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
-  next: HttpHandlerFn
+  next: HttpHandlerFn,
 ): Observable<HttpEvent<any>> => {
   const cookieService = inject(CookieService);
   const authToken = cookieService.get("auth_token");

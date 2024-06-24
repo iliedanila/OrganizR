@@ -5,7 +5,6 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   UserCredential,
-  User,
 } from "@angular/fire/auth";
 import { Observable } from "rxjs";
 import { authState } from "rxfire/auth";
@@ -15,7 +14,10 @@ import { CookieService } from "ngx-cookie-service";
   providedIn: "root",
 })
 export class AuthService {
-  constructor(private auth: Auth, private cookieService: CookieService) {}
+  constructor(
+    private auth: Auth,
+    private cookieService: CookieService,
+  ) {}
 
   async register(email: string, password: string): Promise<UserCredential> {
     return createUserWithEmailAndPassword(this.auth, email, password);
@@ -25,7 +27,7 @@ export class AuthService {
     const userCredential = await signInWithEmailAndPassword(
       this.auth,
       email,
-      password
+      password,
     );
     const idToken = await userCredential.user.getIdToken();
     this.cookieService.set("auth_token", idToken, 1); // Expires in 1 day
@@ -37,11 +39,12 @@ export class AuthService {
     return signOut(this.auth);
   }
 
-  getCurrentUser(): Observable<User | null> {
+  getCurrentUser(): Observable<any> {
     return authState(this.auth);
   }
 
   isLoggedIn(): boolean {
-    return !!this.auth.currentUser;
+    const token = this.cookieService.get("auth_token");
+    return !!token;
   }
 }
