@@ -23,9 +23,9 @@ export class TaskService {
     >;
   }
 
-  addTask(task: Task): Promise<void> {
+  async addTask(task: Task): Promise<void> {
     const tasksCollection = collection(this.firestore, "tasks");
-    return addDoc(tasksCollection, task).then(() => {}); // Return void
+    await addDoc(tasksCollection, task); // Return void
   }
 
   deleteTask(taskId: string): Promise<void> {

@@ -1,7 +1,8 @@
 import { db } from "../config/firebase";
 import { Task } from "../interfaces/task.interface";
+import { TaskService } from "../interfaces/task.service";
 
-export class FirebaseTaskService {
+export class FirebaseTaskService implements TaskService {
   private collectionName = "tasks";
 
   async createTask(task: Task): Promise<void> {

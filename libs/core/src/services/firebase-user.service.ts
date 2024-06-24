@@ -6,7 +6,7 @@ export class FirebaseUserService implements UserService {
   async register(
     email: string,
     password: string,
-    displayName: string,
+    displayName: string
   ): Promise<User> {
     const userRecord = await auth.createUser({
       email,
