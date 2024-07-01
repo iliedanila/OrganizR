@@ -15,7 +15,7 @@ import { MatButtonModule } from "@angular/material/button";
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class TaskCreateComponent {
-  task: Task = { title: "", description: "" };
+  task: Task = { id: "", title: "", description: "" };
 
   constructor(
     private taskService: TaskService,

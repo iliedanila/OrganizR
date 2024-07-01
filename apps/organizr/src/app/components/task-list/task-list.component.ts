@@ -5,6 +5,7 @@ import { TaskService } from "../../services/task.service";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { NgForOf } from "@angular/common";
+import { Task } from "@organizr/core";
 
 @Component({
   selector: "app-task-list",
@@ -14,7 +15,7 @@ import { NgForOf } from "@angular/common";
   imports: [MatCardModule, MatButtonModule, RouterLink, NgForOf],
 })
 export class TaskListComponent implements OnInit {
-  tasks: any[] = [];
+  tasks: Task[] = [];
 
   constructor(
     private taskService: TaskService,
@@ -27,7 +28,7 @@ export class TaskListComponent implements OnInit {
   }
 
   loadTasks(): void {
-    this.taskService.getTasks().subscribe((tasks: any[]) => {
+    this.taskService.getTasks().subscribe((tasks: Task[]) => {
       this.tasks = tasks;
     });
   }
